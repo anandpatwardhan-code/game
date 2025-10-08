@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contacts Try1</title>
+  </head>
+  <body>
+    <h1>Contacts (try1)</h1>
+    <form id="addForm">
+      <input id="name" placeholder="Name" required />
+      <input id="email" placeholder="Email" />
+      <input id="phone" placeholder="Phone" />
+      <button>Add</button>
+    </form>
+    <ul id="list"></ul>
+
+    <script>
+      const api = '/api/contacts';
+      async function refresh() {
+        const res = await fetch(api);
+        const items = await res.json();
+        const ul = document.getElementById('list');
+        ul.innerHTML = '';
+        items.forEach(c => {
+          const li = document.createElement('li');
+          li.innerText = `${c.name} — ${c.email} — ${c.phone}`;
+          const del = document.createElement('button'); del.innerText = 'Delete';
+          del.onclick = async () => { await fetch(api + '/' + c.id, { method: 'DELETE' }); refresh(); };
+          li.appendChild(del);
+          ul.appendChild(li);
+        });
+      }
+      document.getElementById('addForm').onsubmit = async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        await fetch(api, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ name, email, phone }) });
+        document.getElementById('name').value=''; document.getElementById('email').value=''; document.getElementById('phone').value='';
+        refresh();
+      };
+      refresh();
+    </script>
+  </body>
+ </html>

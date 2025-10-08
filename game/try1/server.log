@@ -1,0 +1,4 @@
+(node:14652) ExperimentalWarning: CommonJS module /Users/anand/Developer/Learning/game/try1/server/index.js is loading ES Module /Users/anand/Developer/Learning/game/try1/node_modules/uuid/dist-node/index.js using require().
+Support for loading ES Module in require() is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Contacts API & static server listening on http://localhost:3000

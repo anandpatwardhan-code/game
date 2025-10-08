@@ -1,0 +1,19 @@
+{
+  "name": "game-try1",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start:server": "node server/index.js",
+    "start:client": "cd client/contacts-app && npm start",
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "uuid": "^13.0.0"
+  }
+}
